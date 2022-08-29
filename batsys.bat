@@ -31,11 +31,13 @@ echo 1) Enter BatNotepad
 echo 2) Search The Web using BBrowser
 echo 3) Delete, Rename and more using RENAMER and DELETER
 echo 4) Read about BatSys in BatSys Operations Manual
+echo 5) Run Commands in our CMD
 set /p deskt-option=""
 if %deskt-option% == 1 goto notepad
 if %deskt-option% == 2 goto bbrowser
 if %deskt-option% == 3 goto extras
 if %deskt-option% == 4 goto manual
+if %deskt-option% == 5 goto batsyscommand
 goto crash-undefined-value
 
 :: Tools
@@ -91,8 +93,15 @@ echo Renamed, Check the File
 echo Thanks for Steping by!
 pause
 goto desktop
-
-
+:batsyscommand
+cls
+title BatSys COMMAND
+echo Type goto desktop to return to the system
+:runloop
+:run
+set /p command=">"
+%command%
+goto runloop
 
 
 
