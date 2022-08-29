@@ -10,3 +10,4 @@ BatSys can be installed Easely in your System, Download installer.bat, Run insta
 - DELETER - Deleter is a Modified Version of RENAMER Designed to Delete Files
 - Easy To use Installer -  BatSys Installer allows you to install BatSys in a Custom Location anytime, You need to be connected to internet as it does HTTP Requests to get the files
 - Easy to use Manual - BatSys Manual allows you to discover BatSys Features and Learn Features about it, Including how to guides
+- Command Line - Run Commands Directly from our Command Line
