@@ -5,25 +5,32 @@ title Booting BatSys
 :sysload
 :: Load System Settings
 set color=1f
+echo color = %color% >>%logfile%
 color %color%
 set ver=v0.1
+echo version %ver% >>%logfile%
 echo Welcome to BatSys %ver%
 echo The Public OS
 set password=password
+echo password "%password%" >>%logfile%
 :: System Logic
 if loggedin == false goto logsession
 if ERRORLEVEL == 1 goto crash-invalid-response
+echo logic build correctly >>%logfile%
 :: System Login
 title BatSys
 :logsession
+set location=logsession
 cls
 echo Welcome to BatSys %ver%
 echo Please Put your BatSys Network Username
 set /p myuser=""
+echo login in %myuser% >>%logfile%
 :logsessionpswdcheck
 echo Hello %myuser%, Just to Verify its you
 echo Please Enter your BatSys Network Password
 set /p mypass=""
+echo password entered: %mypass% >>%logfile%
 if %mypass% == %password% goto load
 goto logsessionerror
 :: Desktop
@@ -78,7 +85,29 @@ echo 1) Change color
 echo 2) Change Password
 echo 3) Logout
 set /p settings-option=""
-if %settings-option% == 1 goto
+if %settings-option% == 1 goto change-color
+if %settings-option% == 2 goto change-password
+:change-password
+title BatSys Password
+set /p oldpass="Existing Password: "
+if %oldpass% == %password% goto change-password-c2
+goto logsessionerror
+:change-password-c2
+set /p newpass="New Password: "
+cls
+set /p confirmpass=""Confirm New Password: "
+if %confirmpass% == %newpass% goto change-password-c3
+goto logsessionerror
+:change-password-c3
+cls
+echo Please Wait...
+set password=%newpass%
+goto logsession
+:change-color
+title BatSys color
+set /p newcolor="New Color (Default 1f) "
+set color = %newcolor%
+goto settings
 :manual
 start manual.bat
 exit
@@ -129,6 +158,7 @@ echo The Session is Invalid, Please Try Again
 echo Restarting the system
 pause
 goto boot
+echo error 505 >>%logfile%
 :crash-undefined-value
 title BatSys Crash
 echo BatSys has Crashed
