@@ -1,5 +1,5 @@
 @echo off
-
+set logfile=log.log
 :boot
 title Booting BatSys
 :sysload
@@ -44,12 +44,14 @@ echo 2) Search The Web using BBrowser
 echo 3) Delete, Rename and more using RENAMER and DELETER
 echo 4) Read about BatSys in BatSys Operations Manual
 echo 5) Run Commands in our CMD
+echo 6) Settings
 set /p deskt-option=""
 if %deskt-option% == 1 goto notepad
 if %deskt-option% == 2 goto bbrowser
 if %deskt-option% == 3 goto extras
 if %deskt-option% == 4 goto manual
 if %deskt-option% == 5 goto batsyscommand
+if %deskt-option% == 6 goto settings
 goto crash-undefined-value
 
 :: Tools
