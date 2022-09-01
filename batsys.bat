@@ -4,11 +4,15 @@
 title Booting BatSys
 :sysload
 :: Load System Settings
-color 1f
+set color=1f
+color %color%
 set ver=v0.1
 echo Welcome to BatSys %ver%
 echo The Public OS
 set password=password
+:: System Logic
+if loggedin == false goto logsession
+if ERRORLEVEL == 1 goto crash-invalid-response
 :: System Login
 title BatSys
 :logsession
@@ -24,6 +28,7 @@ if %mypass% == %password% goto load
 goto logsessionerror
 :: Desktop
 :load
+set loggedin=true
 :desktop
 echo Welcome, %myuser%
 echo Please Select an Option
@@ -66,6 +71,14 @@ set /p extras-tool="Tool: "
 if %extras-tool% == 1 goto renamer
 if %extras-tool% == 2 goto deleter
 
+:settings
+cls
+title BatSys Settings
+echo 1) Change color
+echo 2) Change Password
+echo 3) Logout
+set /p settings-option=""
+if %settings-option% == 1 goto
 :manual
 start manual.bat
 exit
@@ -121,6 +134,14 @@ title BatSys Crash
 echo BatSys has Crashed
 echo Error 500 UNDEFINED_VALUE
 echo System Received a Undefined Value to run, The System Tried to Run the Undefined Value, Operation Aborted 
+echo Restarting the system
+pause
+goto boot
+:crash-invalid-response
+title BatSys Crash
+echo BatSys has Crashed
+echo Error 100 INVALID_RESPONSE
+echo System Received a Invalid Response
 echo Restarting the system
 pause
 goto boot
