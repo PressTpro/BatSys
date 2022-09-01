@@ -6,7 +6,7 @@ title Booting BatSys
 :: Load System Settings
 set color=1f
 color %color%
-set ver=v1.0
+set ver=v0.1
 echo Welcome to BatSys %ver%
 echo The Public OS
 set password=password
